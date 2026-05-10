@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vikas Patil — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+h1,h2,h3{font-family:'Syne',sans-serif;letter-spacing:-.02em}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+:root{
+  --a:#3b82f6;--ab:#60a5fa;--ad:#1d4ed8;
+  --glow:rgba(59,130,246,.18);--soft:rgba(59,130,246,.08);
+  --bg:#070d1a;--bg2:#0c1526;
+  --sur:#121e32;--sur2:#172540;
+  --b1:rgba(59,130,246,.12);--b2:rgba(255,255,255,.07);
+  --t1:#eef2ff;--t2:#94a3b8;--t3:#4b6280;
+  --nav:rgba(7,13,26,.84);
+  --sh:0 4px 40px rgba(0,0,0,.5);--shc:0 2px 24px rgba(0,0,0,.35);
+  --tr:.3s cubic-bezier(.4,0,.2,1);--r:16px;--rl:24px
+}
+[data-theme="light"]{
+  --bg:#f4f7ff;--bg2:#eaf0ff;
+  --sur:#fff;--sur2:#eef3ff;
+  --b1:rgba(59,130,246,.15);--b2:rgba(0,0,0,.07);
+  --t1:#0f172a;--t2:#475569;--t3:#94a3b8;
+  --nav:rgba(244,247,255,.9);
+  --sh:0 4px 40px rgba(59,130,246,.1);--shc:0 2px 24px rgba(59,130,246,.08)
+}
+
+body{background:var(--bg);color:var(--t1)}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity:.3}
+
+/* ORBS */
+.orb{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;animation:drift 14s ease-in-out infinite alternate}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,.11),transparent 70%);top:-250px;right:-200px}
+.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(29,78,216,.09),transparent 70%);bottom:15%;left:-150px;animation-delay:-7s}
+.o3{width:350px;height:350px;background:radial-gradient(circle,rgba(99,102,241,.07),transparent 70%);bottom:-100px;right:10%;animation-delay:-3.5s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(35px,25px) scale(1.06)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(24px,5vw);background:var(--nav);
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-bottom:1px solid var(--b2);transition:background var(--tr),box-shadow var(--tr)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.03em;color:var(--t1)}
+.logo span{color:var(--a)}
+.nl{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nl a{font-size:.85rem;font-weight:500;color:var(--t2);position:relative;transition:color var(--tr)}
+.nl a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--a);transition:width var(--tr)}
+.nl a:hover{color:var(--t1)}.nl a:hover::after{width:100%}
+.nr{display:flex;align-items:center;gap:10px}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--b1);background:var(--sur);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);font-size:.95rem}
+.ib:hover{border-color:var(--a);color:var(--a);transform:rotate(20deg)}
+.hb{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hb span{display:block;width:22px;height:2px;background:var(--t2);border-radius:2px;transition:all .3s}
+
+/* LAYOUT */
+main{position:relative;z-index:1}
+.sec{padding:clamp(80px,10vw,120px) max(24px,6vw);max-width:1180px;margin:0 auto}
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--b2),transparent);max-width:1180px;margin:0 auto}
+
+/* LABELS */
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--a);padding:5px 12px;border-radius:100px;background:var(--soft);border:1px solid var(--glow);margin-bottom:18px}
+.st{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.08;margin-bottom:14px;color:var(--t1)}
+.ss{color:var(--t2);font-size:1.02rem;max-width:560px;line-height:1.72;margin-bottom:52px}
+
+/* HERO */
+#about{min-height:100vh;display:flex;align-items:center;padding-top:80px}
+.hg{display:grid;grid-template-columns:1fr auto;gap:clamp(40px,6vw,90px);align-items:center;width:100%}
+
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:500;letter-spacing:.04em;color:var(--ab);background:var(--soft);border:1px solid var(--glow);padding:6px 14px;border-radius:100px;margin-bottom:22px;animation:fu .6s ease both}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--a);animation:pp 2s ease infinite}
+@keyframes pp{0%,100%{box-shadow:0 0 0 0 var(--glow)}50%{box-shadow:0 0 0 6px transparent}}
+
+.hn{font-size:clamp(3.2rem,7vw,5.8rem);font-weight:800;line-height:.93;letter-spacing:-.04em;animation:fu .7s .1s ease both}
+.hn .gr{display:block;background:linear-gradient(120deg,var(--ab) 0%,#818cf8 55%,var(--ab) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shim 4s linear infinite,fu .7s .1s ease both}
+@keyframes shim{to{background-position:200% center}}
+
+.hr2{display:inline-block;font-size:clamp(1.05rem,2vw,1.35rem);font-weight:400;color:var(--t2);margin:14px 0 26px;animation:fu .7s .2s ease both}
+.hr2 strong{color:var(--t1);font-weight:600}
+.hab{font-size:1.03rem;color:var(--t2);line-height:1.82;max-width:520px;margin-bottom:34px;animation:fu .7s .3s ease both}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;animation:fu .7s .4s ease both}
+
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;cursor:pointer;border:none;transition:all var(--tr);white-space:nowrap}
+.bp{background:var(--a);color:#fff}
+.bp:hover{background:var(--ad);transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.38)}
+.bg2{background:var(--sur);color:var(--t2);border:1px solid var(--b2)}
+.bg2:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px)}
+
+.srow{display:flex;gap:clamp(20px,4vw,52px);flex-wrap:wrap;margin-top:44px;animation:fu .7s .5s ease both}
+.sn{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--ab);display:block}
+.sl{font-size:.72rem;color:var(--t3);font-weight:500;letter-spacing:.04em}
+
+/* AVATAR */
+.avc{display:flex;flex-direction:column;align-items:center;gap:14px;animation:fu .8s .2s ease both}
+.avr{width:clamp(180px,22vw,260px);height:clamp(180px,22vw,260px);border-radius:30px;overflow:hidden;border:1px solid var(--b1);box-shadow:0 0 0 6px var(--soft),var(--sh);background:var(--sur)}
+.avr img{width:100%;height:100%;object-fit:cover}
+.avf{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;background:linear-gradient(135deg,var(--sur2),var(--sur));color:var(--a)}
+.avl{display:flex;flex-direction:column;gap:7px;width:100%}
+.avlk{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--t3);transition:color var(--tr)}
+.avlk:hover{color:var(--a)}.avlk svg{width:14px;height:14px;flex-shrink:0}
+
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* SKILLS */
+.sw{display:flex;flex-wrap:wrap;gap:9px}
+.sk{padding:8px 18px;border-radius:100px;font-size:.82rem;font-weight:500;border:1px solid var(--b1);background:var(--sur);color:var(--t2);cursor:default;transition:all var(--tr);opacity:0;transform:translateY(10px)}
+.sk.v{opacity:1;transform:none}
+.sk:hover{border-color:var(--a);color:var(--ab);background:var(--soft);transform:translateY(-2px)}
+
+/* EXPERIENCE */
+.ec{background:var(--sur);border:1px solid var(--b2);border-radius:var(--r);padding:32px 36px;transition:all var(--tr);position:relative;overflow:hidden}
+.ec::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--a),var(--ad));opacity:0;transition:opacity var(--tr)}
+.ec:hover{border-color:var(--glow);box-shadow:var(--shc)}.ec:hover::before{opacity:1}
+.et{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.eco{font-family:'Syne',sans-serif;font-size:1.22rem;font-weight:700;color:var(--t1)}
+.erl{font-size:.9rem;color:var(--ab);font-weight:500;margin-top:4px}
+.ep{font-size:.76rem;color:var(--t3);font-weight:500;background:var(--sur2);padding:4px 12px;border-radius:100px;border:1px solid var(--b2);white-space:nowrap}
+.el{list-style:none;display:flex;flex-direction:column;gap:10px}
+.el li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--t2);line-height:1.62}
+.el li::before{content:'';flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--a);margin-top:8px}
+
+/* PROJECTS */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px}
+.pc{background:var(--sur);border:1px solid var(--b2);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:13px;transition:all var(--tr);position:relative;overflow:hidden;opacity:0;transform:translateY(20px)}
+.pc.v{opacity:1;transform:none}
+.pc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,var(--soft),transparent 65%);opacity:0;transition:opacity var(--tr)}
+.pc:hover{border-color:var(--glow);transform:translateY(-5px);box-shadow:var(--shc)}.pc:hover::after{opacity:1}
+.pt{display:flex;justify-content:space-between;align-items:flex-start}
+.pi{width:42px;height:42px;border-radius:11px;background:var(--soft);border:1px solid var(--glow);display:flex;align-items:center;justify-content:center;color:var(--ab);z-index:1;position:relative}
+.pa{display:flex;gap:7px;z-index:1;position:relative}
+.pb{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--b2);color:var(--t3);background:var(--bg2);transition:all var(--tr)}
+.pb:hover{border-color:var(--a);color:var(--a)}
+.pn{font-family:'Syne',sans-serif;font-size:1.02rem;font-weight:700;color:var(--t1);z-index:1;position:relative}
+.pd{font-size:.84rem;color:var(--t2);line-height:1.65;flex:1;z-index:1;position:relative}
+.ptags{display:flex;flex-wrap:wrap;gap:6px;z-index:1;position:relative}
+.ptag{font-size:.71rem;font-weight:500;padding:3px 10px;border-radius:100px;background:var(--bg2);border:1px solid var(--b2);color:var(--t3)}
+.plive{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:500;color:var(--a);z-index:1;position:relative}
+.plive::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--a);animation:pp 2s ease infinite}
+
+/* EDUCATION */
+.eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px}
+.edu{background:var(--sur);border:1px solid var(--b2);border-radius:var(--r);padding:28px;transition:all var(--tr)}
+.edu:hover{border-color:var(--glow);transform:translateY(-3px);box-shadow:var(--shc)}
+.ei{width:44px;height:44px;border-radius:12px;background:var(--soft);border:1px solid var(--glow);display:flex;align-items:center;justify-content:center;color:var(--ab);margin-bottom:16px}
+.ed{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--t1);margin-bottom:6px}
+.ec2{font-size:.88rem;color:var(--t2);line-height:1.5}
+.ey{font-size:.73rem;font-weight:600;color:var(--a);margin-top:12px;letter-spacing:.04em}
+
+/* CONTACT */
+.cb{background:var(--sur);border:1px solid var(--b1);border-radius:var(--rl);padding:clamp(40px,6vw,72px);text-align:center;position:relative;overflow:hidden}
+.cb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--soft),transparent 65%);pointer-events:none}
+.cl{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.clk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:100px;font-size:.875rem;font-weight:500;background:var(--bg2);border:1px solid var(--b2);color:var(--t2);transition:all var(--tr)}
+.clk:hover{border-color:var(--a);color:var(--ab);transform:translateY(-2px)}
+.clk svg{width:16px;height:16px}
+
+footer{position:relative;z-index:1;text-align:center;padding:26px max(24px,6vw);border-top:1px solid var(--b2);font-size:.77rem;color:var(--t3)}
+footer span{color:var(--a)}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.rv.v{opacity:1;transform:none}
+
+@media(max-width:768px){
+  .hb{display:flex}
+  .nl{position:fixed;top:64px;left:0;right:0;background:var(--nav);backdrop-filter:blur(20px);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;border-bottom:1px solid var(--b2)}
+  .nl.open{max-height:340px;padding:12px 0}
+  .nl li{width:100%}.nl a{display:block;padding:14px max(24px,5vw);font-size:.95rem}.nl a::after{display:none}
+  .hg{grid-template-columns:1fr;text-align:center}
+  .avc{order:-1}.hbtns,.srow,.badge{justify-content:center}
+  .hab{margin-left:auto;margin-right:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+
+<nav id="nav">
+  <div class="logo">VP<span>.</span></div>
+  <ul class="nl" id="nl">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nr">
+    <button class="ib" id="tb" aria-label="Toggle theme">☀️</button>
+    <button class="hb" id="hb" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="sec" id="about">
+  <div class="hg">
+    <div>
+      <div class="badge"><span class="dot"></span>Open to Opportunities · Bangalore, India</div>
+      <h1 class="hn">Vikas<br><span class="gr">Patil.</span></h1>
+      <p class="hr2"><strong>Data Analyst</strong> — Turning raw data into real decisions</p>
+      <p class="hab">Data Analyst at TCS building interactive dashboards and automated reporting pipelines. Passionate about transforming complex datasets into clear, actionable insights. Currently pursuing MCA from Chandigarh University while shipping real-world projects.</p>
+      <div class="hbtns">
+        <a href="mailto:vikaspatil8105@email.com" class="btn bp">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Get in Touch
+        </a>
+        <a href="https://www.linkedin.com/in/vikas-patil-3b3ab22a3/" target="_blank" class="btn bg2">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/VikasP2003" target="_blank" class="btn bg2">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="srow">
+        <div><span class="sn">1+</span><span class="sl">Years at TCS</span></div>
+        <div><span class="sn">25%</span><span class="sl">Effort Automated</span></div>
+        <div><span class="sn">4</span><span class="sl">Live Projects</span></div>
+        <div><span class="sn">3</span><span class="sl">Tech Stacks</span></div>
+      </div>
+    </div>
+    <div class="avc">
+      <div class="avr">
+        <img src="https://avatars.githubusercontent.com/VikasP2003" alt="Vikas Patil"
+          onerror="this.style.display='none';document.getElementById('avf').style.display='flex'"/>
+        <div class="avf" id="avf" style="display:none">VP</div>
+      </div>
+      <div class="avl">
+        <a class="avlk" href="https://www.linkedin.com/in/vikas-patil-3b3ab22a3/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/vikas-patil-3b3ab22a3
+        </a>
+        <a class="avlk" href="https://github.com/VikasP2003" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          github.com/VikasP2003
+        </a>
+        <span class="avlk">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+          Bangalore, India
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- SKILLS -->
+<section class="sec" id="skills">
+  <div class="rv">
+    <div class="chip">⚡ Expertise</div>
+    <h2 class="st">Skills & Technologies</h2>
+    <p class="ss">A diverse toolkit spanning business intelligence, data analytics, full-stack development, and database management — auto-extracted from real project stacks.</p>
+  </div>
+  <div class="sw" id="sg"></div>
+</section>
+
+<div class="div"></div>
+
+<!-- EXPERIENCE -->
+<section class="sec" id="experience">
+  <div class="rv">
+    <div class="chip">💼 Work</div>
+    <h2 class="st">Experience</h2>
+    <p class="ss">Building data solutions that create measurable business impact at scale.</p>
+  </div>
+  <div class="ec rv">
+    <div class="et">
+      <div>
+        <div class="eco">Tata Consultancy Services (TCS)</div>
+        <div class="erl">Sr. Data Analyst</div>
+      </div>
+      <span class="ep">2025 – Present</span>
+    </div>
+    <ul class="el">
+      <li>Automated reporting processes using Python and Power BI, reducing manual effort by 25% and freeing team bandwidth for strategic analytical work.</li>
+      <li>Collaborated with cross-functional stakeholders to translate business requirements into data models, dashboards, and KPI frameworks that improved decision-making quality.</li>
+      <li>Designed and maintained interactive dashboards providing real-time visibility into key business metrics, enabling leadership to act on live data insights.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- PROJECTS -->
+<section class="sec" id="projects">
+  <div class="rv">
+    <div class="chip">🚀 Projects</div>
+    <h2 class="st">Featured Projects</h2>
+    <p class="ss">Four real-world projects spanning React apps, Power BI dashboards, and Django systems — all sourced directly from GitHub.</p>
+  </div>
+  <div class="pg">
+
+    <!-- Cinemate -->
+    <div class="pc" id="p0">
+      <div class="pt">
+        <div class="pi">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="pa">
+          <a href="https://cinemateplus.netlify.app/" target="_blank" class="pb" title="Live Demo">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+          <a href="https://github.com/VikasP2003/Cinemate-react-app" target="_blank" class="pb" title="GitHub">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="pn">🎬 Cinemate Plus</div>
+      <div class="pd">Modern movie browsing web app built with React + Vite. Explore popular, trending, upcoming & top-rated movies with dark mode, search, reviews, and real-time data from the TMDB API. Fully responsive, deployed live on Netlify.</div>
+      <div class="ptags">
+        <span class="ptag" style="color:#61dafb;border-color:#61dafb22;background:#61dafb11">React</span>
+        <span class="ptag" style="color:#ffd62e;border-color:#ffd62e22;background:#ffd62e11">Vite</span>
+        <span class="ptag" style="color:#38bdf8;border-color:#38bdf822;background:#38bdf811">Tailwind CSS</span>
+        <span class="ptag" style="color:#f1e05a;border-color:#f1e05a22;background:#f1e05a11">JavaScript</span>
+        <span class="ptag">TMDB API</span>
+        <span class="ptag">Netlify</span>
+      </div>
+      <a href="https://cinemateplus.netlify.app/" target="_blank" class="plive">cinemateplus.netlify.app ↗</a>
+    </div>
+
+    <!-- HR Dashboard -->
+    <div class="pc" id="p1">
+      <div class="pt">
+        <div class="pi">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="pa">
+          <a href="https://github.com/VikasP2003/HR-Talent-analytics-Dashboard" target="_blank" class="pb" title="GitHub">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="pn">📊 HR Talent Analytics Dashboard</div>
+      <div class="pd">Power BI dashboard analyzing workforce data — employee distribution, attrition trends, performance ratings, gender ratio analysis, salary insights, and age demographics using DAX measures and Power Query transformations on real HR CSV data.</div>
+      <div class="ptags">
+        <span class="ptag" style="color:#f2c811;border-color:#f2c81122;background:#f2c81111">Power BI</span>
+        <span class="ptag" style="color:#f2c811;border-color:#f2c81122;background:#f2c81111">DAX</span>
+        <span class="ptag">Power Query</span>
+        <span class="ptag">Excel / CSV</span>
+        <span class="ptag">HR Analytics</span>
+        <span class="ptag">Data Viz</span>
+      </div>
+    </div>
+
+    <!-- Energy Dashboard -->
+    <div class="pc" id="p2">
+      <div class="pt">
+        <div class="pi">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="pa">
+          <a href="https://github.com/VikasP2003/energy-monitoring-dashboard" target="_blank" class="pb" title="GitHub">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="pn">⚡ Energy Monitoring Dashboard</div>
+      <div class="pd">End-to-end energy analytics solution — Python for data preprocessing and exploratory analysis, Power BI for interactive dashboards. Features trend analysis, anomaly detection, peak usage identification, and cost-reduction KPI cards. Published on NovyPro.</div>
+      <div class="ptags">
+        <span class="ptag" style="color:#f2c811;border-color:#f2c81122;background:#f2c81111">Power BI</span>
+        <span class="ptag" style="color:#3572a5;border-color:#3572a522;background:#3572a511">Python</span>
+        <span class="ptag">Power Query</span>
+        <span class="ptag">DAX</span>
+        <span class="ptag">EDA</span>
+        <span class="ptag">Excel</span>
+      </div>
+    </div>
+
+    <!-- Clinical -->
+    <div class="pc" id="p3">
+      <div class="pt">
+        <div class="pi">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M9 12h6M9 16h6M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M12 6v6"/></svg>
+        </div>
+        <div class="pa">
+          <a href="https://github.com/VikasP2003/clinical-data-analysis-system" target="_blank" class="pb" title="GitHub">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="pn">🏥 Clinical Data Analysis System</div>
+      <div class="pd">Django-based web application for managing patient and clinical records backed by MySQL. Features one-to-many patient relationships, full CRUD operations, clean CSS-styled interface, and structured data migrations via Django ORM.</div>
+      <div class="ptags">
+        <span class="ptag" style="color:#3572a5;border-color:#3572a522;background:#3572a511">Python</span>
+        <span class="ptag" style="color:#3572a5;border-color:#3572a522;background:#3572a511">Django</span>
+        <span class="ptag" style="color:#00758f;border-color:#00758f22;background:#00758f11">MySQL</span>
+        <span class="ptag" style="color:#e34c26;border-color:#e34c2622;background:#e34c2611">HTML</span>
+        <span class="ptag">CSS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- EDUCATION -->
+<section class="sec" id="education">
+  <div class="rv">
+    <div class="chip">🎓 Education</div>
+    <h2 class="st">Academic Background</h2>
+    <p class="ss">Strong computing foundation fuelling my data analytics and full-stack development work.</p>
+  </div>
+  <div class="eg">
+    <div class="edu rv">
+      <div class="ei"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42A12 12 0 0112 21a12 12 0 01-6.16-10.42L12 14z"/></svg></div>
+      <div class="ed">Master of Computer Applications (MCA)</div>
+      <div class="ec2">Chandigarh University</div>
+      <div class="ey">📚 Pursuing · 2024 – Present</div>
+    </div>
+    <div class="edu rv">
+      <div class="ei"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42A12 12 0 0112 21a12 12 0 01-6.16-10.42L12 14z"/></svg></div>
+      <div class="ed">Bachelor of Computer Applications (BCA)</div>
+      <div class="ec2">KLE's SSMS BCA College, Athani</div>
+      <div class="ey">✅ Completed</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="cb rv">
+    <div class="chip">📬 Let's Talk</div>
+    <h2 class="st">Get In Touch</h2>
+    <p class="ss" style="margin:0 auto 36px">Whether it's a data project, job opportunity, or just a hello — I'd love to hear from you.</p>
+    <div class="cl">
+      <a href="mailto:vikaspatil8105@email.com" class="clk">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        vikaspatil8105@email.com
+      </a>
+      <a href="https://www.linkedin.com/in/vikas-patil-3b3ab22a3/" target="_blank" class="clk">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/VikasP2003" target="_blank" class="clk">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.05c-3.19.69-3.86-1.54-3.86-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.97 10.97 0 012.87-.39c.97.01 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13v3.17c0 .3.21.66.79.55C20.22 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a href="https://cinemateplus.netlify.app/" target="_blank" class="clk">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        Live Project ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><p>Designed &amp; built by <span>Vikas Patil</span> · Bangalore, India · 2025</p></footer>
+
+<script>
+// Theme
+const html=document.documentElement,tb=document.getElementById('tb');
+tb.addEventListener('click',()=>{const d=html.getAttribute('data-theme')==='dark';html.setAttribute('data-theme',d?'light':'dark');tb.textContent=d?'🌙':'☀️'});
+
+// Hamburger
+const hb=document.getElementById('hb'),nl=document.getElementById('nl');
+hb.addEventListener('click',()=>nl.classList.toggle('open'));
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
+// Nav shadow
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.boxShadow=scrollY>40?'0 2px 28px rgba(0,0,0,.4)':'none'});
+
+// Skills
+const skills=['Power BI','DAX','Power Query','Tableau','Data Visualization','Business Intelligence','Python','SQL','JavaScript','HTML','CSS','Pandas','NumPy','Matplotlib','Seaborn','React','Django','MySQL','PostgreSQL','Vite','Tailwind CSS','Axios','Excel','Jupyter Notebook','Git','GitHub','Data Analysis','ETL Pipelines','Reporting Automation','Stakeholder Management','Statistical Analysis','TMDB API','Netlify'];
+const sg=document.getElementById('sg');
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.1});
+skills.forEach((s,i)=>{const el=document.createElement('div');el.className='sk';el.textContent=s;el.style.transitionDelay=`${i*.038}s`;sg.appendChild(el);obs.observe(el)});
+
+// Reveal
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+// Project cards stagger
+const co=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.08});
+['p0','p1','p2','p3'].forEach((id,i)=>{const el=document.getElementById(id);if(el){el.style.transitionDelay=`${i*.1}s`;co.observe(el)}});
+</script>
+</body>
+</html>
